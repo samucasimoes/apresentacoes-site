@@ -1,22 +1,455 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apresentações</title>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apresentações | Consultor de Sistemas Hospitalar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#060d17;
+    --bg-1:#0a1526;
+    --bg-2:#0d1e33;
+    --card:#0e2135;
+    --card-border:rgba(45,212,191,0.16);
+    --teal:#2dd4bf;
+    --teal-dim:#1b8f82;
+    --teal-glow:rgba(45,212,191,0.35);
+    --text-hi:#f3f7fa;
+    --text-mid:#c7d3de;
+    --text-low:#8fa2b3;
+    --divider:rgba(255,255,255,0.08);
+  }
 
+  .titulo{
+    font-size: 14px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg-0);
+    color:var(--text-hi);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand,.nav a,.badge strong{
+    font-family:'Poppins',sans-serif;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+
+  /* ---------- Header ---------- */
+  header.top{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 48px;
+    background:rgba(6,13,23,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--divider);
+  }
+  .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.15rem;letter-spacing:.2px;}
+  .brand .icon-box{
+    width:38px;height:38px;border-radius:10px;
+    background:linear-gradient(145deg,#123246,#0c2131);
+    border:1px solid var(--card-border);
+    display:flex;align-items:center;justify-content:center;color:var(--teal);
+  }
+  nav.main-nav{display:flex;align-items:center;gap:36px;font-weight:600;font-size:.95rem;}
+  nav.main-nav a{position:relative;padding-bottom:10px;color:var(--text-low);transition:color .25s ease;cursor:pointer;}
+  nav.main-nav a:hover{color:var(--text-hi);}
+  nav.main-nav a.active{color:var(--teal);}
+  nav.main-nav a.active::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+    background:var(--teal);border-radius:2px;
+    box-shadow:0 0 10px var(--teal-glow);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(1100px 500px at 78% 20%, rgba(45,212,191,0.10), transparent 60%),
+      linear-gradient(180deg,#08131f 0%, #0a1a2c 55%, #081320 100%);
+    padding:72px 48px 0;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:block;
+    max-width:1400px;
+    margin:0 auto;
+  }
+  .hero-copy{padding-bottom:64px;}
+  .eyebrow-line{
+    display:flex;align-items:center;gap:10px;margin-bottom:18px;
+    color:var(--teal);font-weight:600;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;
+    opacity:0;transform:translateY(10px);animation:rise .7s ease forwards;
+  }
+  .eyebrow-line .dash{width:28px;height:2px;background:var(--teal);border-radius:2px;}
+  .hero h1{
+    font-size:clamp(2.1rem, 3.6vw, 3.15rem);
+    line-height:1.14;
+    font-weight:800;
+    margin:0 0 22px;
+    letter-spacing:-0.5px;
+    opacity:0;transform:translateY(16px);animation:rise .8s ease .1s forwards;
+  }
+  .hero h1 .accent{
+    color:var(--teal);
+    text-shadow:0 0 28px var(--teal-glow);
+  }
+  .hero p.lede{
+    color:var(--text-mid);
+    font-size:1.05rem;
+    line-height:1.7;
+    max-width:750px;
+    margin:0 0 40px;
+    opacity:0;transform:translateY(16px);animation:rise .8s ease .22s forwards;
+  }
+  .feature-row{
+    display:flex;gap:34px;flex-wrap:wrap;
+    opacity:0;transform:translateY(16px);animation:rise .8s ease .34s forwards;
+  }
+  .feature-item{display:flex;align-items:flex-start;gap:12px;max-width:190px;}
+  .feature-item .ico{
+    flex:none;width:42px;height:42px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    border:1.5px solid var(--teal-dim);color:var(--teal);
+    background:rgba(45,212,191,0.06);
+  }
+  .feature-item strong{display:block;font-family:'Poppins',sans-serif;font-size:.95rem;margin-bottom:2px;}
+  .feature-item span{color:var(--text-low);font-size:.85rem;line-height:1.4;}
+
+  /* ---------- Hero image ---------- */
+ 
+  .pulse-line{
+    position:absolute;left:-6%;top:52%;width:60%;height:90px;
+    opacity:.55;pointer-events:none;
+  }
+  .portrait-wrap{
+    position:relative;
+    border-radius:20px 20px 0 0;
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  .portrait-wrap img{
+    width:100%;height:auto;display:block;
+    -webkit-mask-image:linear-gradient(to bottom, black 82%, transparent 100%);
+    mask-image:linear-gradient(to bottom, black 82%, transparent 100%);
+  }
+  .badges-bar{
+    position:relative;
+    margin-top:-46px;
+    z-index:5;
+    background:rgba(6,14,24,0.88);
+    border:1px solid var(--card-border);
+    backdrop-filter:blur(8px);
+    border-radius:16px;
+    display:flex;align-items:center;justify-content:center;gap:22px;
+    padding:16px 20px;
+    max-width:92%;
+    margin-left:auto;margin-right:auto;
+    transform:translateY(30px);
+    box-shadow:0 20px 40px -18px rgba(0,0,0,0.55);
+  }
+  .badges-bar .badge{display:flex;align-items:center;gap:8px;font-weight:600;font-size:.95rem;white-space:nowrap;}
+  .badges-bar .sep{width:1px;height:20px;background:var(--divider);}
+  .badges-bar .badge.age{color:var(--text-mid);font-weight:600;}
+
+  /* ---------- Info cards ---------- */
+  .cards-section{
+    max-width:1400px;margin:0 auto;
+    padding:88px 48px 40px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:26px;
+  }
+  .info-card{
+    background:linear-gradient(180deg,var(--card),#0a1a2c);
+    border:1px solid var(--card-border);
+    border-radius:18px;
+    padding:30px 28px;
+    opacity:0;transform:translateY(24px);
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+.info-card{
+    background:linear-gradient(180deg,var(--card),#0a1a2c);
+    border:1px solid var(--card-border);
+    border-radius:18px;
+    padding:30px 28px;
+
+    opacity:0;
+    transform:translateY(35px);
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.info-card.reveal{
+    opacity:1;
+    transform:translateY(0);
+}
+  .info-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(45,212,191,0.4);
+    box-shadow:0 20px 40px -22px rgba(45,212,191,0.25);
+  }
+  .info-card .head{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+  .info-card .head .ico{
+    width:40px;height:40px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(45,212,191,0.08);color:var(--teal);border:1px solid var(--card-border);
+  }
+  .info-card h3{margin:0;font-size:1.12rem;font-weight:700;}
+  .info-card p{color:var(--text-mid);line-height:1.7;font-size:.95rem;margin:0;}
+  .info-card ul li{
+    display:flex;gap:10px;align-items:flex-start;
+    color:var(--text-mid);font-size:.93rem;line-height:1.6;padding:7px 0;
+  }
+  .info-card ul li .check{color:var(--teal);flex:none;margin-top:2px;}
+  .info-card ul.day li{
+    list-style:none;position:relative;padding-left:16px;
+  }
+  .info-card ul.day li::before{
+    content:"";position:absolute;left:0;top:14px;width:5px;height:5px;border-radius:50%;
+    background:var(--teal);
+  }
+  .handwritten{
+    margin-top:16px;
+    font-family:'Caveat',cursive;
+    color:var(--teal);
+    font-size:1.35rem;
+    line-height:1.35;
+    transform:rotate(-1deg);
+  }
+
+  /* ---------- Quote bar ---------- */
+  .quote-bar{
+    max-width:1400px;margin:12px auto 90px;padding:0 48px;
+  }
+  .quote-inner{
+    background:linear-gradient(180deg,#0e2135,#0a1a2c);
+    border:1px solid var(--card-border);
+    border-radius:18px;
+    display:flex;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;gap:24px;
+    padding:26px 34px;
+  }
+  .quote-inner blockquote{
+    margin:0;display:flex;gap:14px;align-items:flex-start;
+    font-family:'Poppins',sans-serif;font-weight:600;font-size:1.02rem;
+    max-width:420px;color:var(--text-hi);
+  }
+  .quote-inner blockquote .qmark{color:var(--teal);font-size:1.6rem;line-height:1;}
+  .tags-row{display:flex;gap:30px;flex-wrap:wrap;align-items:center;}
+  .tag{display:flex;align-items:center;gap:9px;color:var(--text-mid);font-weight:600;font-size:.92rem;}
+  .tag svg{color:var(--teal);}
+  .tag-sep{width:1px;height:18px;background:var(--divider);}
+
+  footer.page-footer{
+    text-align:center;color:var(--text-low);font-size:.82rem;
+    padding:0 20px 40px;
+  }
+
+  @keyframes rise{
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:980px){
+    header.top{padding:16px 22px;}
+    .hero{padding:44px 22px 0;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-copy{padding-bottom:36px;}
+    
+    .cards-section{grid-template-columns:1fr;padding:56px 22px 10px;}
+    .quote-bar{padding:0 22px;}
+    .quote-inner{justify-content:center;text-align:center;}
+    .quote-inner blockquote{max-width:100%;justify-content:center;}
+    .feature-row{gap:22px;justify-content:center;text-align:left;}
+    .badges-bar{flex-wrap:wrap;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+  }
+</style>
+</head>
 <body>
 
-  <h1>Deploy automático funcionando!</h1>
+<header class="top">
+  <div class="brand">
+    <span class="icon-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    </span>
+    <span class="titulo">Samuel Simões</span>
+  </div>
+  <nav class="main-nav">
+    <a class="active" data-tab="apresentacoes">Apresentações</a>
+    <a data-tab="sobre">Sobre mim</a>
+  </nav>
+</header>
 
-    <p>
-        Site criado por Samuel.
-    </p>
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow-line"><span class="dash"></span> CONSULTOR DE SISTEMAS HOSPITALAR</div>
+      <h1>Transformo tecnologia em <span class="accent">soluções que cuidam de pessoas.</span></h1>
+      <p class="lede">Consultor de Sistemas Hospitalar com mais de 10 anos de experiência, apaixonado por inovação, eficiência e resultados que realmente fazem diferença no dia a dia.</p>
 
-    <button>Clique aqui</button>
+      <div class="feature-row">
+        <div class="feature-item">
+          <span class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5.4 2 .3.3 0 0 0 4.8 2.3M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-3"/><path d="M3 4v10a4 4 0 0 0 4 4v0a4 4 0 0 0 4-4V4"/><circle cx="20" cy="10" r="2"/></svg>
+          </span>
+          <div><strong>Especialista</strong><span>em sistemas hospitalares</span></div>
+        </div>
+        <div class="feature-item">
+          <span class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </span>
+          <div><strong>Foco em</strong><span>integração, dados e automação</span></div>
+        </div>
+        <div class="feature-item">
+          <span class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </span>
+          <div><strong>Comprometido</strong><span>com qualidade, segurança e resultado</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="cards-section">
+  <div class="info-card">
+    <div class="head">
+      <span class="ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
+      </span>
+      <h3>O que eu faço</h3>
+    </div>
+    <p>Atuo na implantação, sustentação e evolução de sistemas hospitalares, conectando tecnologia, processos e pessoas para gerar eficiência e melhorar a experiência no cuidado.</p>
+  </div>
+
+  <div class="info-card">
+    <div class="head">
+      <span class="ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
+      </span>
+      <h3>Destaques</h3>
+    </div>
+    <ul>
+      <li><span class="check">✓</span> Mais de 10 anos de experiência em TI Hospitalar</li>
+      <li><span class="check">✓</span> Especialista na plataforma MV Soul / MVPEP</li>
+      <li><span class="check">✓</span> Integrações, automações e análise de requisitos</li>
+      <li><span class="check">✓</span> Foco em dados, indicadores e tomada de decisão</li>
+      <li><span class="check">✓</span> Compromisso com inovação e melhoria contínua</li>
+    </ul>
+  </div>
+
+  <div class="info-card">
+    <div class="head">
+      <span class="ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+      </span>
+      <h3>No meu dia a dia</h3>
+    </div>
+    <ul class="day">
+      <li>Reuniões, café e sarcasmo</li>
+      <li>Resolver problemas (e pequenos incêndios)</li>
+      <li>Transformar desafios em soluções</li>
+      <li>E de vez em quando... reclamar 😄</li>
+    </ul>
+    <div class="handwritten">Se não for pra fazer direito, que seja com estilo.</div>
+  </div>
+</section>
+
+<section class="quote-bar">
+  <div class="quote-inner">
+    <blockquote><span class="qmark">"</span>Tecnologia não é só sobre sistemas. É sobre pessoas. Sempre.</blockquote>
+    <div class="tags-row">
+      <div class="tag">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2a2.5 2.5 0 0 0-2.5 2.5v1A2.5 2.5 0 0 0 4.5 8 2.5 2.5 0 0 0 7 10.5v1A2.5 2.5 0 0 0 4.5 14 2.5 2.5 0 0 0 7 16.5v1A2.5 2.5 0 0 0 9.5 20a2.5 2.5 0 0 0 2.5-2.5v-13A2.5 2.5 0 0 0 9.5 2Z"/><path d="M14.5 2a2.5 2.5 0 0 1 2.5 2.5v1A2.5 2.5 0 0 1 19.5 8 2.5 2.5 0 0 1 17 10.5v1a2.5 2.5 0 0 1 2.5 2.5A2.5 2.5 0 0 1 17 16.5v1a2.5 2.5 0 0 1-2.5 2.5A2.5 2.5 0 0 1 12 17.5v-13A2.5 2.5 0 0 1 14.5 2Z"/></svg>
+        Estratégico
+      </div>
+      <div class="tag-sep"></div>
+      <div class="tag">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.525-1.525A2.402 2.402 0 0 1 12 1.998c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02Z"/></svg>
+        Resolutivo
+      </div>
+      <div class="tag-sep"></div>
+      <div class="tag">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        Orientado a resultados
+      </div>
+      <div class="tag-sep"></div>
+      <div class="tag">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Trabalho em equipe
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="page-footer">© <span id="year"></span> — Consultor de Sistemas Hospitalar. Feito com café, ranço e foco.</footer>
+
+<script>
+  // Ano dinâmico no rodapé
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Navegação entre abas (Apresentações / Sobre mim) - placeholder de troca de estado
+  const navLinks = document.querySelectorAll('.main-nav a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+      if(link.dataset.tab === 'sobre'){
+        alert('Página "Sobre mim" ainda não foi criada — adicione o conteúdo aqui!');
+        link.classList.remove('active');
+        document.querySelector('[data-tab="apresentacoes"]').classList.add('active');
+      }
+    });
+  });
+
+  // Revela os cards ao rolar a página
+const cards = document.querySelectorAll('.info-card');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+
+    if (entry.isIntersecting) {
+      entry.target.classList.add('reveal');
+    } else {
+      entry.target.classList.remove('reveal');
+    }
+
+  });
+}, {
+  threshold: 0.25
+});
+
+cards.forEach(card => observer.observe(card));
+
+  // Leve efeito de paralaxe no retrato ao mover o mouse
+  const portrait = document.querySelector('.portrait-wrap');
+  
+  if(window.matchMedia('(min-width: 981px)').matches && portrait){
+    heroVisual.addEventListener('mousemove', (e) => {
+      const rect = heroVisual.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      portrait.style.transform = `translate(${x * 8}px, ${y * 6}px)`;
+    });
+    heroVisual.addEventListener('mouseleave', () => {
+      portrait.style.transform = 'translate(0,0)';
+    });
+  }
+</script>
 
 </body>
-
 </html>
